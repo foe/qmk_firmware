@@ -1,5 +1,5 @@
 #+TITLE: Xd75
-#+PROPERTY: header-args :tangle ~/qmk_firmware/keyboards/xiudi/xd75/keymaps/foe/test_keymap.c :comments no :main no
+#+PROPERTY: header-args :tangle ~/qmk_firmware/keyboards/xiudi/xd75/keymaps/foe/keymap.c :comments no :main no
 
 This is my qmk firmware for my keyboard. I grew tired of organizing the keycode
 array in plain text so I made it a literate .org file. I've never done this
@@ -8,8 +8,9 @@ before, so bear with me.
 * Layers
 
   #+BEGIN_COMMENT
-  #+NAME: empty-layer
-  | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    |
+    #+NAME: empty-layer
+
+  |  <6>   | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    | <6>    |
   |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|--------|--------|--------|
   | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      |
   | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      | -      |
@@ -20,33 +21,67 @@ before, so bear with me.
   #+END_COMMENT
 
   #+NAME: qwerty-layer
-  |-------+------+------+----+-----+-----+------+------+-------+-----+-----+------+------+------+-------|
-  | GRV   | 1    | 2    | 3  | 4   | 5   | MINS | PSCR | EQL   | 6   | 7   | 8    | 9    | 0    | BSPC  |
-  | TAB   | Q    | W    | E  | R   | T   | LBRC | INS  | RBRC  | Y   | U   | I    | O    | P    | QUOT  |
-  | CTESC | A    | S    | D  | F   | G   | HOME | DEL  | PGUP  | H   | J   | K    | L    | SCLN | ENT   |
-  | LSFT  | Z    | X    | C  | V   | B   | END  | UP   | PGDN  | N   | M   | COMM | DOT  | SLSH | SFBSL |
-  | LCTL  | LGUI | LALT | FN | SPC | SPC | LEFT | DOWN | RIGHT | SPC | SPC | FN   | RALT | RGUI | RCTL  |
-  |-------+------+------+----+-----+-----+------+------+-------+-----+-----+------+------+------+-------|
+  |-------+-------+------+----+-------+-----+------+------+-------+-----+-------+------+------+---------+------|
+  | GRV   | 1     | 2    | 3  | 4     | 5   | MINS | PSCR | EQL   | 6   | 7     | 8    | 9    | 0       | BSPC |
+  | TAB   | Q     | W    | E  | R     | T   | LBRC | INS  | RBRC  | Y   | U     | I    | O    | P       | QUOT |
+  | CTESC | A_NAV | S    | D  | F     | G   | HOME | DEL  | PGUP  | H   | J     | K    | L    | SMC_NAV | ENT  |
+  | LSFT  | Z     | X    | C  | V     | B   | END  | UP   | PGDN  | N   | M     | COMM | DOT  | SLSH    | RSFT |
+  | LCTL  | LGUI  | LALT | FN | LOWER | SPC | LEFT | DOWN | RIGHT | SPC | RASPC | FN   | RALT | RGUI    | BSLS |
+  |-------+-------+------+----+-------+-----+------+------+-------+-----+-------+------+------+---------+------|
 
   #+NAME: colemak-layer
-  |-------+------+------+----+-----+-----+------+------+-------+-----+-----+------+------+------+-------|
-  | GRV   | 1    | 2    | 3  | 4   | 5   | MINS | PSCR | EQL   | 6   | 7   | 8    | 9    | 0    | BSPC  |
-  | TAB   | Q    | W    | F  | P   | B   | LBRC | INS  | RBRC  | J   | L   | U    | Y    | SCLN | QUOT  |
-  | CTESC | A    | R    | S  | T   | G   | HOME | DEL  | PGUP  | M   | N   | E    | I    | O    | ENT   |
-  | LSFT  | Z    | X    | C  | V   | D   | END  | UP   | PGDN  | K   | H   | COMM | DOT  | SLSH | SFBSL |
-  | LCTL  | LGUI | LALT | FN | SPC | SPC | LEFT | DOWN | RIGHT | SPC | SPC | FN   | RALT | RGUI | RCTL  |
-  |-------+------+------+----+-----+-----+------+------+-------+-----+-----+------+------+------+-------|
+  |-------+-------+------+----+-------+-----+------+------+-------+-----+-------+------+------+------+------|
+  | GRV   | 1     | 2    | 3  | 4     | 5   | MINS | PSCR | EQL   | 6   | 7     | 8    | 9    | 0    | BSPC |
+  | TAB   | Q     | W    | F  | P     | B   | LBRC | INS  | RBRC  | J   | L     | U    | Y    | SCLN | QUOT |
+  | CTESC | A_NAV | R    | S  | T     | G   | HOME | DEL  | PGUP  | M   | N     | E    | I    | O    | ENT  |
+  | LSFT  | Z     | X    | C  | D     | V   | END  | UP   | PGDN  | K   | H     | COMM | DOT  | SLSH | RSFT |
+  | LCTL  | LGUI  | LALT | FN | LOWER | SPC | LEFT | DOWN | RIGHT | SPC | RASPC | FN   | RALT | RGUI | BSLS |
+  |-------+-------+------+----+-------+-----+------+------+-------+-----+-------+------+------+------+------|
 
   #+NAME: fn-layer
-  |------+------+---------+------+----------+---------+------+------+------+------+------+-------+------+------+------|
-  | F1   | F2   | F3      | F4   | F5       | F6      | NLCK | SLSH | ASTR | F7   | F8   | F9    | F10  | F11  | F12  |
-  | MSEL | CALC | MYCM    | MAIL | RGB_HUD  | RGB_HUI | P7   | P8   | P9   | MINS | --   | --    | PSCR | SLCK | PAUS |
-  | MPRV | MPLY | MNXT    | E    | RGB_SAD  | RGB_SAI | P4   | P5   | P6   | PLUS | --   | RESET | --   | --   | --   |
-  | VOLD | MUTE | VOLU    | APP  | RGB_VAD  | RGB_VAI | P1   | P2   | P3   | PENT | --   | --    | --   | --   | --   |
-  | --   | --   | RGB_TOG | FN   | RGB_RMOD | RGB_MOD | P0   | --   | PDOT | PENT | PENT | FN    | --   | --   | --   |
-  |------+------+---------+------+----------+---------+------+------+------+------+------+-------+------+------+------|
+  |------+------+---------+------+----------+---------+------+------+------+------+------+----+------+------+------|
+  | F12  | F1   | F2      | F3   | F4       | F5      | NLCK | SLSH | ASTR | F6   | F7   | F8 | F9   | F10  | F11  |
+  | MSEL | CALC | MYCM    | MAIL | RGB_HUD  | RGB_HUI | P7   | P8   | P9   | MINS | --   | -- | PSCR | SLCK | PAUS |
+  | MPRV | MPLY | MNXT    | ALTD | RGB_SAD  | RGB_SAI | P4   | P5   | P6   | PLUS | --   | -- | --   | --   | --   |
+  | VOLD | MUTE | VOLU    | APP  | RGB_VAD  | RGB_VAI | P1   | P2   | P3   | PENT | --   | -- | --   | --   | --   |
+  | --   | --   | RGB_TOG | FN   | RGB_RMOD | RGB_MOD | P0   | --   | PDOT | PENT | PENT | FN | --   | --   | --   |
+  |------+------+---------+------+----------+---------+------+------+------+------+------+----+------+------+------|
 
+  #+NAME: lower-layer
+    |----+----+----+------+-----+----+----+----+----+------+------+------+------+-------+-----|
+    | -- | -- | -- | --   | --  | -- | -- | -- | -- | --   | --   | --   | --   | --    | --  |
+    | -- | -- | -- | --   | --  | -- | -- | -- | -- | --   | LCBR | RCBR | UNDS | EQL   | DQT |
+    | -- | -- | -- | COLN | DQT | -- | -- | -- | -- | PERC | LPRN | RPRN | MINS | COLON | --  |
+    | -- | -- | -- | --   | --  | -- | -- | -- | -- | PLUS | LBRC | RBRC | --   | --    | --  |
+    | -- | -- | -- | --   | --  | -- | -- | -- | -- | --   | --   | --   | --   | --    | --  |
+    |----+----+----+------+-----+----+----+----+----+------+------+------+------+-------+-----|
 
+  #+NAME: raise-layer
+    |----+----+----+--------+----------+----+----+----+----+------+------+------+------+-------+-----|
+    | -- | -- | -- | --     | --       | -- | -- | -- | -- | --   | --   | --   | --   | --    | --  |
+    | -- | -- | -- | --     | CLJ_TL   | -- | -- | -- | -- | --   | LCBR | RCBR | UNDS | EQL   | DQT |
+    | -- | -- | -- | CLJ_HM | CLJ_TF   | -- | -- | -- | -- | PERC | LPRN | RPRN | MINS | COLON | --  |
+    | -- | -- | -- | --     | CLJ_KEYS | -- | -- | -- | -- | DQT  | LBRC | RBRC | --   | --    | --  |
+    | -- | -- | -- | --     | --       | -- | -- | -- | -- | --   | --   | --   | --   | --    | --  |
+    |----+----+----+--------+----------+----+----+----+----+------+------+------+------+-------+-----|
+
+  #+NAME: nav-layer
+  |----+----+----+----+----+----+----+----+----+------+-------+-------+-------+----+--------|
+  | -- | -- | -- | -- | -- | -- | -- | -- | -- | --   | --    | --    | CAPT  | -- | CTLBSP |
+  | -- | -- | -- | -- | -- | -- | -- | -- | -- | HOME | CTRLD | CTRLU | END   | -- | --     |
+  | -- | -- | -- | -- | -- | -- | -- | -- | -- | LEFT | DOWN  | UP    | RIGHT | -- | --     |
+  | -- | -- | -- | -- | -- | -- | -- | -- | -- | --   | --    | --    | --    | -- | --     |
+  | -- | -- | -- | -- | -- | -- | -- | -- | -- | --   | --    | --    | --    | -- | --     |
+  |----+----+----+----+----+----+----+----+----+------+-------+-------+-------+----+--------|
+
+  #+NAME: adjust-layer
+  |----+-------+----+----+----+----+----+----+----+----+--------+---------+----+----+------|
+  | -- | --    | -- | -- | -- | -- | -- | -- | -- | -- | --     | --      | -- | -- | SLEP |
+  | -- | RESET | -- | -- | -- | -- | -- | -- | -- | -- | --     | --      | -- | -- | --   |
+  | -- | --    | -- | -- | -- | -- | -- | -- | -- | -- | QWERTY | COLEMAK | -- | -- | --   |
+  | -- | --    | -- | -- | -- | -- | -- | -- | -- | -- | --     | --      | -- | -- | --   |
+  | -- | --    | -- | -- | -- | -- | -- | -- | -- | -- | --     | --      | -- | -- | --   |
+  |----+-------+----+----+----+----+----+----+----+----+--------+---------+----+----+------|
 
 * Keymap Conversion in Python
 
@@ -65,27 +100,20 @@ while row < len(keys):
     while key < len(keys[row]):
         keyName = str(keys[row][key])
         if keyName == '--':
-            keyName = 'TRANSPARENT'
-        if keyName.startswith('RESET') or keyName.startswith('RGB'):
+            keyName = 'TRNS'
+        if keyName.startswith('RESET') or keyName.startswith('RGB') or keyName.startswith('EMACS') or keyName.startswith('CLJ'):
             results += keyName
         else:
             results += 'KC_' + keyName
         if key != 14:
             results += ', '
         key+=1
-    if row != 5:
+    if row != 4:
         results += ','
     results += '\n'
     row+=1
 return results
 #+END_SRC
-
-  #+RESULTS: layer-to-array
-  : KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_NLCK, KC_SLSH, KC_ASTR, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12,
-  : KC_MSEL, KC_CALC, KC_MYCM, KC_MAIL, RGB_HUD, RGB_HUI, KC_P7, KC_P8, KC_P9, KC_MINS, KC_TRANSPARENT, KC_TRANSPARENT, KC_PSCR, KC_SLCK, KC_PAUS,
-  : KC_MPRV, KC_MPLY, KC_MNXT, KC_E, RGB_SAD, RGB_SAI, KC_P4, KC_P5, KC_P6, KC_PLUS, KC_TRANSPARENT, RESET, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-  : KC_VOLD, KC_MUTE, KC_VOLU, KC_APP, RGB_VAD, RGB_VAI, KC_P1, KC_P2, KC_P3, KC_PENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-  : KC_TRANSPARENT, KC_TRANSPARENT, RGB_TOG, KC_FN, RGB_RMOD, RGB_MOD, KC_P0, KC_TRANSPARENT, KC_PDOT, KC_PENT, KC_PENT, KC_FN, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
 
 
 * keymap.c
@@ -99,19 +127,44 @@ return results
 #include QMK_KEYBOARD_H
    #+END_SRC
 
+   #+RESULTS:
+
 ** Keycodes
 
-#+BEGIN_SRC C :noweb yes
+        #+BEGIN_SRC C :noweb yes
 
 enum xd75_keycodes {
   KC_QWERTY = SAFE_RANGE,
-  KC_COLEMAK
+  KC_COLEMAK,
+      EMACS_LEFT,
+      EMACS_RIGHT,
+      EMACS_DOWN,
+      EMACS_UP,
+      CLJ_TF,
+      CLJ_TL,
+      CLJ_HM,
+      CLJ_KEYS
 };
+
+
+// Right-hand home row mods
+#define KC_CTLBSP LCTL_T(KC_BSPC)
+
 
 #define KC_CTESC   LCTL_T(KC_ESC)
 #define KC_SFBSL   RSFT_T(KC_BSLS)
 #define KC_SHINS   LSFT(KC_INS)
+#define KC_CAPT    LSFT(KC_F9)
+#define KC_CTRLU   LCTL(KC_U)
+#define KC_CTRLD   LCTL(KC_D)
+#define KC_ALTD    LALT(KC_D)
 #define KC_FN      MO(_FN)
+#define KC_RAISE   MO(_RAISE)
+#define KC_LOWER   MO(_LOWER)
+#define KC_RASPC   LT(_RAISE, KC_SPC)
+#define KC_LOSPC   LT(_LOWER, KC_SPC)
+#define KC_A_NAV   LT(_NAV, KC_A)
+    #define KC_SMC_NAV LT(_NAV, KC_SCLN)
 
 #+END_SRC
 
@@ -122,6 +175,10 @@ enum xd75_layers {
 _QWERTY,
 _COLEMAK,
 _FN,
+_LOWER,
+_RAISE,
+_ADJUST,
+    _NAV
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -139,6 +196,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [_FN] = LAYOUT_ortho_5x15(
 <<layer-to-array(fn-layer)>>
+),
+[_RAISE] = LAYOUT_ortho_5x15(
+<<layer-to-array(raise-layer)>>
+),
+[_LOWER] = LAYOUT_ortho_5x15(
+<<layer-to-array(lower-layer)>>
+),
+    [_NAV] = LAYOUT_ortho_5x15(
+    <<layer-to-array(nav-layer)>>
+    ),
+[_ADJUST] = LAYOUT_ortho_5x15(
+<<layer-to-array(adjust-layer)>>
 )
 };
 
@@ -149,6 +218,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ** Process User Input
 
    #+BEGIN_SRC C :noweb yes
+layer_state_t layer_state_set_user(layer_state_t state) {
+  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(_NAV, KC_A):
+            return TAPPING_TERM + LONG_TAPPING_TERM;
+        case LT(_NAV, KC_SCLN):
+            return TAPPING_TERM + LONG_TAPPING_TERM;
+        case LT(_RAISE, KC_SPC):
+            return TAPPING_TERM + LONG_TAPPING_TERM;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode)    {
    #+END_SRC
@@ -157,7 +243,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     Set Colemak layout
 
-    #+BEGIN_SRC C :noweb yes
+#+BEGIN_SRC C :noweb yes
  case KC_COLEMAK:
  if (record->event.pressed) {
      set_single_persistent_default_layer(_COLEMAK);
@@ -165,11 +251,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  return false;
  break;
 
-    #+END_SRC
+#+END_SRC
 
     Set Qwerty layout.
 
-    #+BEGIN_SRC C :noweb yes
+#+BEGIN_SRC C :noweb yes
  case KC_QWERTY:
  if (record->event.pressed) {
      set_single_persistent_default_layer(_QWERTY);
@@ -177,8 +263,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  return false;
  break;
 
-    #+END_SRC
+#+END_SRC
 
+                EMACS WINDOW 
+            
+ #+BEGIN_SRC C :noweb yes
+   case CLJ_TF:
+   if (record->event.pressed) {
+      SEND_STRING("(-> )" SS_TAP(X_LEFT));
+   }
+   return true;
+   break;
+   case CLJ_TL:
+   if (record->event.pressed) {
+      SEND_STRING("(->> )" SS_TAP(X_LEFT));
+   }
+   return true;
+   break;
+   case CLJ_HM:
+   if (record->event.pressed) {
+      SEND_STRING("{:}" SS_TAP(X_LEFT));
+   }
+   return true;
+   break;
+   case CLJ_KEYS:
+   if (record->event.pressed) {
+      SEND_STRING("{:keys []}" SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+   }
+   return true;
+   break;
+
+ #+END_SRC
 
 *** End user input
 
@@ -188,3 +303,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  return true;
  }
     #+End_src
+    

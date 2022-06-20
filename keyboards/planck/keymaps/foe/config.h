@@ -24,6 +24,10 @@
         { SONG(QWERTY_SOUND), SONG(COLEMAK_SOUND), SONG(DVORAK_SOUND) }
 #endif
 
+#ifndef USB_MAX_POWER_CONSUMPTION
+#    define USB_MAX_POWER_CONSUMPTION 100
+#endif
+
 /*
  * MIDI options
  */
