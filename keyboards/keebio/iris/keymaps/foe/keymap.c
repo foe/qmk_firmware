@@ -37,9 +37,6 @@ enum custom_keycodes {
   CLJ_KEY,
 };
 
-
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
@@ -52,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT(
                     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, LSA(KC_BSPC),
-                    RESET  , LSA(KC_Q) , _______, _______, _______, KC_PIPE,                             _______, KC_LCBR, KC_RCBR, KC_UNDS, KC_EQL,  KC_DQT,
+                    QK_BOOT, LSA(KC_Q) , _______, _______, _______, KC_PIPE,                             _______, KC_LCBR, KC_RCBR, KC_UNDS, KC_EQL,  KC_DQT,
                     _______, _______, _______, KC_PLUS, KC_DQT,  KC_BSLS,                             KC_PERC, KC_LPRN, KC_RPRN, KC_MINS, KC_COLON,_______,
                     _______, _______, _______, _______, KC_QUOT, _______, _______,          _______,  KC_PLUS, KC_LBRC, KC_RBRC, _______, _______, _______,
                                                          _______, _______, _______,          KC_LSFT,  _______, _______
