@@ -26,10 +26,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TERM_PER_KEY
 #define TAPPING_TERM 200
-#define LONG_TAPPING_TERM 800
+#define LONG_TAPPING_TERM 500
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
 
 //add double tap shift for caps word
 #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+
+#define TAPPING_FORCE_HOLD_PER_KEY
