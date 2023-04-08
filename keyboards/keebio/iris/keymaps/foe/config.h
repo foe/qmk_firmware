@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TERM_PER_KEY
 #define TAPPING_TERM 200
-#define LONG_TAPPING_TERM 500
+#define LONG_TAPPING_TERM 300
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
